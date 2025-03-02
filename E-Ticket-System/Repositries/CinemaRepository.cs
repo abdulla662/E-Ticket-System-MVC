@@ -1,8 +1,9 @@
 ﻿using E_Ticket_System.Models;
+using E_Ticket_System.Repositries.Irepostries;
 
 namespace E_Ticket_System.Repositries
 {
-    public class CinemaRepository:respository<Cinema>
+    public class CinemaRepository:respository<Cinema>,IcinemaReposirotry
     {
     }
 }
