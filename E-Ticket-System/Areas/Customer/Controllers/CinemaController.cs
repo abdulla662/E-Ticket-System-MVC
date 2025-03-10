@@ -1,4 +1,5 @@
 ﻿using E_Ticket_System.Repositries;
+using E_Ticket_System.Repositries.Irepostries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Ticket_System.Areas.Customer.Controllers
@@ -6,16 +7,20 @@ namespace E_Ticket_System.Areas.Customer.Controllers
     [Area("Customer")]
     public class CinemaController : Controller
     {
-        public CinemaRepository CinemaRepository = new CinemaRepository();
+        private readonly IcinemaReposirotry cinemaRepository;
+        public CinemaController(IcinemaReposirotry cinemarepository)
+        {
+            this.cinemaRepository = cinemarepository;
+        }
 
         public IActionResult CinemaView ()
         {
-            var data = CinemaRepository.Get();
+            var data = cinemaRepository.Get();
             return View(data);
         }
         public IActionResult CinemaMovie(int id)
         {
-            var cinema = CinemaRepository.GetOne(e => e.Id == id, includes: [e => e.Movies]);
+            var cinema = cinemaRepository.GetOne(e => e.Id == id, includes: [e => e.Movies]);
 
             if (cinema == null)
             {

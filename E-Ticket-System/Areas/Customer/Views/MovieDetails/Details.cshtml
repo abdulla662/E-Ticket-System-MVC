@@ -7,7 +7,8 @@
         
             
          <div class="col-md-4">
-            <img src="~/images/movies/@Model.ImgUrl" class="img-fluid rounded movie-poster shadow-lg" alt="Movie Name">
+            <img src="@(Model.ImgUrl.StartsWith("http") ? Model.ImgUrl : "/images/movies/" + Model.ImgUrl)"
+                 class="img-fluid rounded movie-poster shadow-lg" alt="Movie Name">
         </div>
 
         <!-- Movie Info -->

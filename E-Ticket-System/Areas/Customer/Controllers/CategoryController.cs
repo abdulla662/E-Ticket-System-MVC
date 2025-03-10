@@ -1,6 +1,7 @@
 ﻿using E_Ticket_System.DataAcess;
 using E_Ticket_System.Models;
 using E_Ticket_System.Repositries;
+using E_Ticket_System.Repositries.Irepostries;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,8 +10,15 @@ namespace E_Ticket_System.Areas.Customer.Controllers
     [Area("Customer")]
     public class CategoryController : Controller
     {
-        CategoryRepository categoryRepository = new CategoryRepository();
-        CinemaRepository cinemaRepository = new CinemaRepository();
+        //CategoryRepository categoryRepository = new CategoryRepository();
+        //CinemaRepository cinemaRepository = new CinemaRepository();
+        private readonly ICategoryRepository categoryRepository;
+        private readonly IcinemaReposirotry CinemaRepository;
+        public CategoryController(ICategoryRepository categoryRepository,IcinemaReposirotry CinemaRepository)
+        {
+            this.categoryRepository = categoryRepository;
+            this.CinemaRepository = CinemaRepository;
+        }
 
 
         public IActionResult CategoryView()
@@ -28,7 +36,7 @@ namespace E_Ticket_System.Areas.Customer.Controllers
             }
 
             var cinemaIds = category.Movies.Select(m => m.CinemaId).Distinct();
-            var cinemas = cinemaRepository.Get(c => cinemaIds.Contains(c.Id)); 
+            var cinemas = CinemaRepository.Get(c => cinemaIds.Contains(c.Id)); 
 
             ViewBag.Cinemas = cinemas.ToList();
 

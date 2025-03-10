@@ -1,10 +1,12 @@
 ﻿using E_Ticket_System.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using E_Ticket_System.Models.ViewModel;
 
 namespace E_Ticket_System.DataAcess
 {
-    public class ApplicationDbContext:DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
     {
         public DbSet<Movie> Movie { get; set; }
@@ -13,7 +15,14 @@ namespace E_Ticket_System.DataAcess
         public DbSet<Cinema> Cinema { get; set; }
         public DbSet<ActorMovies> ActorMovies { get; set; }
 
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+       : base(options)
+        {
+        }
+        public ApplicationDbContext()
+        {
 
+        }
 
 
 
@@ -24,22 +33,18 @@ namespace E_Ticket_System.DataAcess
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Movie>().ToTable("Movie");  
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Movie>().ToTable("Movie");
             modelBuilder.Entity<Category>().ToTable("Category");
             modelBuilder.Entity<Cinema>().ToTable("Cinema");
             modelBuilder.Entity<Actor>().ToTable("Actor");
             modelBuilder.Entity<ActorMovies>().ToTable("ActorMovies");
             modelBuilder.Entity<ActorMovies>()
-            .HasKey(e => new { e.ActorId, e.MovieId });
-            modelBuilder.Entity<ActorMovies>()
-    .HasOne(am => am.actor)
-    .WithMany(a => a.ActorMovies)
-    .HasForeignKey(am => am.ActorId); 
+                   .HasKey(am => new { am.ActorId, am.MovieId });
 
-            modelBuilder.Entity<ActorMovies>()
-                .HasOne(am => am.movie)
-                .WithMany(m => m.ActorMovies)
-                .HasForeignKey(am => am.MovieId);
+
         }
+        public DbSet<E_Ticket_System.Models.ViewModel.RegisterVm> RegisterVm { get; set; } = default!;
+        public DbSet<E_Ticket_System.Models.ViewModel.LoginVM> LoginVM { get; set; } = default!;
     }
 }

@@ -7,14 +7,16 @@ namespace E_Ticket_System.Repositries
 {
     public class respository<T>  where T : class
     {
-        ApplicationDbContext dbContext = new ApplicationDbContext();
+        //ApplicationDbContext dbContext = new ApplicationDbContext();
+        private readonly ApplicationDbContext dbContext;
         public DbSet<T> dbset;
 
-
-        public respository()
+        public respository(ApplicationDbContext applicationDb)
         {
+            this.dbContext = applicationDb;
             dbset = dbContext.Set<T>();
-        }
+
+        }  
         public void Create(T entity)
         {
             dbset.Add(entity);

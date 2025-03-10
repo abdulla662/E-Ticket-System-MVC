@@ -1,5 +1,6 @@
 using E_Ticket_System.Models;
 using E_Ticket_System.Repositries;
+using E_Ticket_System.Repositries.Irepostries;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -10,20 +11,21 @@ namespace E_Ticket_System.Areas.Customer.Controllers
 
 
     public class HomeController : Controller
-    {
-        public MovieRepository movieRepository = new MovieRepository();
+    { 
+        private readonly ImovieRepository _movieRepository;
+        public HomeController(ImovieRepository movieRepository)
+        {
+            this._movieRepository = movieRepository;
+        }
 
 
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+     
 
         public IActionResult Index()
         {
-            var data = movieRepository.Get(includes: [e => e.Cinema]);
+            var data = _movieRepository.Get(includes: [e => e.Cinema]);
             if (data != null) {
                 return View(data.ToList());
 
@@ -35,7 +37,7 @@ namespace E_Ticket_System.Areas.Customer.Controllers
         }
         public IActionResult search(string keyword)
         {
-            var data = movieRepository.Get(e=> e.Name.Contains(keyword), includes:[e=> e.Cinema]).ToList();
+            var data = _movieRepository.Get(e=> e.Name.Contains(keyword), includes:[e=> e.Cinema]).ToList();
             
                 return View("Index", data.ToList());
 

@@ -24,6 +24,16 @@
                 <li class="nav-item"><a class="nav-link" href="/Customer/Category/CategoryView">Categories</a></li>
                 <li class="nav-item"><a class="nav-link" href="/Customer/Cinema/CinemaView">Cinemas</a></li>
             </ul>
+            <div class="d-flex align-items-center text-white ms-4">
+                @if (User.Identity.IsAuthenticated)
+                
+                {
+                    <span class="me-3">Welcome,@User.Identity.Name</span>
+
+                }
+                <a class="btn btn-light" href="/Identity/Account/userpage">Account Manage</a>
+            </div>
+        </div>
         </div>
         <form class="d-flex ms-3" method="get" asp-area="Customer" asp-controller="Home" asp-action="Search" >
             <input class="form-control me-2" type="search" name="keyword" placeholder="Search for movie..." aria-label="Search">

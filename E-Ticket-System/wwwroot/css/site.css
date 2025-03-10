@@ -26,7 +26,8 @@ body {
 
 /* Hero Section */
 .hero-section {
-    background: url('https://source.unsplash.com/1600x900/?cinema') center/cover no-repeat;
+    background: url('https://source.unsplash.com/1600x900/?cinema') no-repeat center;
+    background-size: cover;
     height: 40vh; /* Keeps hero section smaller */
     min-height: 250px;
     display: flex;

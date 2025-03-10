@@ -1,4 +1,6 @@
-﻿namespace E_Ticket_System.Models
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+
+namespace E_Ticket_System.Models
 {
     public class Cinema
     {
@@ -8,7 +10,7 @@
         public string CinemaLogo { get; set; }
 
         public string Address { get; set; }
-
+        [ValidateNever] 
         public  List<Movie> Movies { get; set; }
 
 

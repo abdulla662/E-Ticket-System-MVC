@@ -13,8 +13,9 @@
         {
             <div class="col-md-4 d-flex align-items-stretch">
                 <div class="card bg-secondary text-light shadow-lg h-100 d-flex flex-column">
-                    <img src="~/images/movies/@item.ImgUrl" class="card-img-top" alt="@item.Name">
-                        <div class="card-body text-center">
+                    <img src="@(item.ImgUrl.StartsWith("http") ? item.ImgUrl : "/images/movies/" + item.ImgUrl)"
+                         class="card-img-top" alt="@item.Name">
+                         <div class="card-body text-center">
                             <h5 class="card-title text-warning">@item.Name</h5>
                             <p class="text-warning">Price: $@item.Price</p>
                             <p>📅 Start Date: @item.StartDate.ToString("dd MMM yyyy")</p>
