@@ -1,4 +1,22 @@
-﻿particlesJS('particles-js', {
+﻿document.addEventListener("DOMContentLoaded", function () {
+    particlesJS("particles-js", {
+        particles: {
+            number: { value: 100 },
+            size: { value: 3 },
+            move: { enable: true, speed: 2 }
+        },
+        interactivity: {
+            detect_on: "canvas",
+            events: {
+                onhover: { enable: false },
+                onclick: { enable: false }
+            }
+        }
+    });
+
+    console.log("Particles.js loaded and adjusted.");
+});
+particlesJS('particles-js', {
     "particles": {
         "number": {
             "value": 100,
@@ -34,7 +52,7 @@
         },
         "move": {
             "enable": true,
-            "speed": 3,
+            "speed": 2,
             "direction": "none",
             "random": false,
             "straight": false,
@@ -46,7 +64,7 @@
         "events": {
             "onhover": {
                 "enable": true,
-                "mode": "repulse" // غير هذا إلى "grab" لو عايز الجسيمات تمسك بعضها عند hover
+                "mode": "grab"  // أو استخدم "repulse" إذا كنت تريد أن تبتعد الجسيمات عند التحويم
             },
             "onclick": {
                 "enable": true,
@@ -55,7 +73,7 @@
         },
         "modes": {
             "grab": {
-                "distance": 140,
+                "distance": 200,  // كلما زادت المسافة زادت استجابة الجسيمات للمؤشر
                 "line_linked": {
                     "opacity": 1
                 }

@@ -27,7 +27,7 @@ namespace E_Ticket_System.Areas.Admin.Controllers
         public IActionResult index()
         {
             var data = movieRepository.Get();
-            return View(data);
+            return View(model:data.ToList());
         }
 
         [HttpGet]
